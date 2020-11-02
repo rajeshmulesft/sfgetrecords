@@ -3,7 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.mycompany</groupId>
+	
+	
 	<artifactId>sfgetrecords</artifactId>
+	
+	
     <version>1.0.0-SNAPSHOT</version>
     <packaging>mule-application</packaging>
 
@@ -29,19 +33,20 @@
 				<artifactId>mule-maven-plugin</artifactId>
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
-				<configuration><cloudHubDeployment>
-					    <uri>https://anypoint.mulesoft.com</uri>
-					    <muleVersion>${mule.version}</muleVersion>
-					    <!-- Deploy User Parameter -->
-					    <username>${anypoint.username}</username>
-					    <password>${anypoint.password}</password>
-					    <!-- Environment Parameter -->
-					    <environment>${cloudhub.environment}</environment>
-					    <applicationName>${cloudhub.app}</applicationName>
-					    <businessGroup>${cloudhub.bg}</businessGroup>
-					    <workerType>${cloudhub.worker}</workerType>
-					</cloudHubDeployment>
-				</configuration>
+				<configuration>
+          <deploymentType>cloudhub</deploymentType>
+          <muleVersion>4.3.0</muleVersion> 
+          <username>rajesh112020</username> 
+          <password>MUL22soft</password> 
+          <applicationName>${artifactId}</applicationName>
+          <environment>Sandbox</environment> 
+          <businessGroup>ABC</businessGroup>
+          
+          <uri>https://anypoint.mulesoft.com/</uri> 
+          <workerType>MICRO</workerType>
+          <workers>1</workers>
+        </configuration>
+			
 			</plugin>
 		</plugins>
 	</build>
