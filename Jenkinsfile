@@ -3,19 +3,21 @@ pipeline {
   stages {
     stage('Unit Test') { 
       steps {
-        sh 'mvn clean'
+        sh 'mvn clean test'
       }
     }
     stage('Deploy Standalone') { 
       steps {
-        echo 'Hello world!' 
+        sh 'mvn deploy -P standalone'
       }
     }
     stage('Deploy ARM') { 
-       echo 'Hello world!' 
+      environment {
+        ANYPOINT_CREDENTIALS = credentials('anypoint.credentials') 
       }
       steps {
-        echo 'Hello world!' 
+        sh 'mvn deploy -P arm -Darm.target.name=local-3.9.0-ee -Danypoint.username=${ANYPOINT_CREDENTIALS_USR}  -Danypoint.password=${ANYPOINT_CREDENTIALS_PSW}' 
+      }
     }
     stage('Deploy CloudHub') { 
       environment {
