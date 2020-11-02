@@ -34,18 +34,20 @@
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-          <deploymentType>cloudhub</deploymentType>
-          <muleVersion>4.3.0</muleVersion> 
-          <username>rajesh112020</username> 
-          <password>MUL22soft</password> 
-          <applicationName>${artifactId}</applicationName>
-          <environment>Sandbox</environment> 
-          <businessGroup>ABC</businessGroup>
-          
-          <uri>https://anypoint.mulesoft.com/</uri> 
-          <workerType>MICRO</workerType>
-          <workers>1</workers>
-        </configuration>
+                    <cloudHubDeployment>
+                        <uri>https://anypoint.mulesoft.com</uri>
+                        <muleVersion>4.3.0</muleVersion>
+                        <username>rajesh112020</username>
+                        <password>MUL22soft</password>
+                        <applicationName>mulesoft-cicd-sample1</applicationName>
+                        <environment>Sandbox</environment>
+                        
+                        <workers>1</workers>
+                        <workerType>MICRO</workerType>
+                        <objectStoreV2>true</objectStoreV2>
+                    </cloudHubDeployment>
+                </configuration>
+				
 			
 			</plugin>
 		</plugins>
