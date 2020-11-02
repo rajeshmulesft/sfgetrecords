@@ -1,0 +1,73 @@
+#%RAML 1.0
+title: getempRecords
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/7c425ab6-eb31-4bd5-a007-588ebb3167fa/ # baseUri: http://localhost:8081/emprecords/getrecords
+traits:
+  client-id-required:
+    headers:
+      client_id:
+        type: string
+      client_secret:
+        type: string
+    responses:
+      401:
+        description: Unauthorized or invalid client application credentials
+      500:
+        description: Bad response from authorization server, or WSDL SOAP Fault error
+/getrecords:
+  is: [client-id-required]
+    
+  get:
+    queryParameters:
+      empid:
+        required: true
+        type: integer
+        example:
+          110
+    responses:
+            200:
+              body:
+                application/json:
+                  example:
+                    {
+                      "empid":110,
+                      "empname":"Rajesh",
+                      "status":1
+                    }
+            500:
+              body:
+                application/json:
+                  example:
+                    {
+                              "errorCode":110,
+                      "Message":"Server Error...."
+                      
+                    }
+/updaterecords:
+  get:
+    queryParameters:
+      empid:
+        required: true
+        type: integer
+        example:
+          110
+    responses:
+            200: 
+              body:
+                application/json:
+                  example:
+                    {
+                      "empid":110,
+                      "empname":"Rajesh",
+                      "status":1
+                    }
+            500:
+              body:
+                application/json:
+                  example:
+                    {
+                              "errorCode":110,
+                      "Message":"Server Error...."
+                      
+                    }
+
+                                    
