@@ -36,7 +36,7 @@
 				
 			<configuration>
 			
-			
+			<!-- 
                     <cloudHubDeployment>
                         <uri>https://anypoint.mulesoft.com</uri>
                         <muleVersion>4.3.0</muleVersion>
@@ -49,7 +49,20 @@
                         <workers>1</workers>
                         <workerType>MICRO</workerType>
                         <objectStoreV2>true</objectStoreV2>
-                    </cloudHubDeployment>
+                    </cloudHubDeployment> -->
+                    
+                    <cloudHubDeployment>
+						<uri>https://anypoint.mulesoft.com/</uri>
+						<muleVersion>${app.runtime}</muleVersion>
+						<username>rajesh112020</username>
+						<password>MUL22soft</password>
+						<applicationName>${project.artifactId}</applicationName>
+						<environment>Sandbox</environment>
+						<workerType>Micro</workerType>
+						<workers>1</workers>
+						<objectStoreV2>true</objectStoreV2>						
+					<!-- 	<region> ${region} </region> -->
+					</cloudHubDeployment>
                 </configuration>
 			
 			</plugin>

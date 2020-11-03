@@ -1,18 +1,30 @@
 pipeline {
-    agent any 
-    stages {
-        stage('Clean package') {
-            steps {
-       			bat 'mvn -B -U -e -V clean -DskipTests package'
-            }
-        }
-        stage('Deploy Development') {
-      environment {
-        ENVIRONMENT = 'Sandbox'
-        
+  agent any
+  stages {
+    stage('Build Application') { 
+      steps {
+        bat 'mvn clean install'
       }
-      	steps {
-            bat 'mvn -U -V -e -B -DskipTests deploy -Dusername=rajesh112020 -Dpassword=MUL22soft -Denvironment=Sandbox -Dmule.version=4.3.0 -Dworkers=1 -Dworker.type=Micro -Dapplication.name=rajesh.sfgetrecords  -DmuleDeploy
-    
-    }}
+    }
+ 	stage('Test') { 
+      steps {
+        echo 'Test Appplication...' 
+        bat 'mvn test'
+      }
+    }
+ 	
+   
+	stage('Deploy CloudHub') { 
+      environment {
+        ANYPOINT_CREDENTIALS = credentials('anypointPlatform')
+      }
+            
+      steps {
+        echo 'Deploying only because of code commit...'
+        echo 'Deploying to  dev environent....'
+        bat 'mvn package deploy -DmuleDeploy -Dusername=${ANYPOINT_CREDENTIALS_USR} -Dpassword=${ANYPOINT_CREDENTIALS_PSW} -DworkerType=Micro -Dworkers=1'
+      }
+	  
+	}
+  }
 }
