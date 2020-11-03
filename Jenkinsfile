@@ -1,31 +1,18 @@
 pipeline {
-  agent any
-  stages {
-    stage('Unit Test') { 
-      steps {
-        sh 'mvn clean test'
-      }
-    }
-    stage('Deploy Standalone') { 
-      steps {
-        sh 'mvn deploy -P standalone'
-      }
-    }
-    stage('Deploy ARM') { 
+    agent any 
+    stages {
+        stage('Clean package') {
+            steps {
+       			bat 'mvn -B -U -e -V clean -DskipTests package'
+            }
+        }
+        stage('Deploy Development') {
       environment {
-        ANYPOINT_CREDENTIALS = credentials('anypoint.credentials') 
+        ENVIRONMENT = 'Sandbox'
+        
       }
-      steps {
-        sh 'mvn deploy -P arm -Darm.target.name=local-3.9.0-ee -Danypoint.username=${ANYPOINT_CREDENTIALS_USR}  -Danypoint.password=${ANYPOINT_CREDENTIALS_PSW}' 
-      }
-    }
-    stage('Deploy CloudHub') { 
-      environment {
-        ANYPOINT_CREDENTIALS = credentials('anypoint.credentials')
-      }
-      steps {
-        sh 'mvn deploy -P cloudhub -Dmule.version=3.9.0 -Danypoint.username=${ANYPOINT_CREDENTIALS_USR} -Danypoint.password=${ANYPOINT_CREDENTIALS_PSW}' 
-      }
-    }
-  }
+      	steps {
+            bat 'mvn -U -V -e -B -DskipTests deploy -Dusername=rajesh112020 -Dpassword=MUL22soft -Denvironment=Sandbox -Dmule.version=4.3.0 -Dworkers=1 -Dworker.type=Micro -Dapplication.name=rajesh.sfgetrecords  -DmuleDeploy
+    
+    }}
 }
