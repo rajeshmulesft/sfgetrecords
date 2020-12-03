@@ -60,7 +60,8 @@
 						<environment>Sandbox</environment>
 						<workerType>Micro</workerType>
 						<workers>1</workers>
-						<objectStoreV2>true</objectStoreV2>						
+						<objectStoreV2>true</objectStoreV2>	
+						<region>eu-west-2</region>					
 					<!-- 	<region> ${region} </region> -->
 					</cloudHubDeployment>
                 </configuration>
